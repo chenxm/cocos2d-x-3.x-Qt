@@ -228,7 +228,11 @@ static void _log(const char *format, va_list args)
 #endif
 
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
-    Director::getInstance()->getConsole()->log(buf);
+    Console* console = Director::getInstance()->getConsole();
+    if(console != NULL)
+    {
+        console->log(buf);
+    }
 #endif
 
 }

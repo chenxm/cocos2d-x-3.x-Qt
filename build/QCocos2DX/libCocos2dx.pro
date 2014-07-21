@@ -30,6 +30,7 @@ win32 {
     TARGET = libcocos2d
 }
 unix:macx {
+    QMAKE_LFLAGS_SONAME = -Wl,-install_name,@executable_path/../Frameworks/
     TARGET = cocos2d
 }
 
@@ -41,6 +42,7 @@ unix:macx {
 #    }
 #    INSTALLS += target
 #}
+
 
 SOURCES +=
 

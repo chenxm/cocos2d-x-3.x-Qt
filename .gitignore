@@ -31,3 +31,4 @@ DerivedData/
 *.xccheckout
 bin/*.app/
 xcuserdata/
+.DS_Store

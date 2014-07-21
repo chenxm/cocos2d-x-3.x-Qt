@@ -54,8 +54,11 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // initialize director
     auto director = Director::getInstance();
-    cocos2d::GLView* glView = cocos2d::GLView::createWithWidget(_mainWindow.getGLWidget());
-    glView->setFrameSize(480, 320);
+    QWidget* parent = _mainWindow.getGLWidget();
+    cocos2d::GLView* glView = cocos2d::GLView::createWithWidget(parent);
+    CCLOG("window: %d, %d", parent->width(), parent->height());
+    //glView->setFrameSize(parent->width(), parent->height());
+    glView->setFrameSize(960, 640);
     director->setOpenGLView(glView);
 
     director->setDisplayStats(true);

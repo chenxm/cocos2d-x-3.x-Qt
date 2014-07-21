@@ -17,7 +17,7 @@ DEFINES += CC_KEYBOARD_SUPPORT
 
 DEFINES += __QT__
 DEFINES += CC_UNDER_QT
-DEFINES += COCOS2D_DEBUG=1
+DEFINES += COCOS2D_DEBUG=2
 
 macx {
     # system libraries.
@@ -26,14 +26,15 @@ macx {
     LIBS += -L/usr/local/lib/ -lz
     LIBS += -L/usr/local/lib/ -lcurl
 
-    INCLUDEPATH += /usr/local/homebrew/Cellar/glew/1.10.0/include
-    LIBS += /usr/local/homebrew/Cellar/glew/1.10.0/lib/libGLEW.a
+#    INCLUDEPATH += /usr/local/homebrew/Cellar/glew/1.10.0/include
+#    LIBS += /usr/local/homebrew/Cellar/glew/1.10.0/lib/libGLEW.a
+    INCLUDEPATH += /opt/local/include
+    LIBS += /opt/local/lib/libGLEW.a
 
     INCLUDEPATH += $$PWD/../../external/lua/luajit/include
 
     LIBS    += -framework Cocoa
     LIBS    += -framework Foundation
-    LIBS    += -framework OpenAL
 
     # prebuilt libraries
     INCLUDEPATH += $$PWD/../../external/png/include/mac
@@ -93,7 +94,9 @@ macx {
         message(-------------------------END-------------------------------)
 
         QMAKE_POST_LINK += $(QTDIR)/bin/macdeployqt $$APP_BUNDLE_PATH &
-        QMAKE_POST_LINK += cp -R $$DYLIB_PATH  $$APP_BUNDLE_PATH/Contents/Frameworks/libcocos2d.1.dylib &
+        QMAKE_POST_LINK += mkdir -p $$APP_BUNDLE_PATH/Contents/Frameworks &
+        QMAKE_POST_LINK += cp $$PWD/../../external/openal/prebuilt/mac/libopenal.1.dylib $$APP_BUNDLE_PATH/Contents/Frameworks/libopenal.1.dylib &
+        QMAKE_POST_LINK += cp $$DYLIB_PATH  $$APP_BUNDLE_PATH/Contents/Frameworks/libcocos2d.1.dylib &
 
     }
 }

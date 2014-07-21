@@ -2,8 +2,6 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-// enable log
-#define COCOS2D_DEBUG 1
 
 UserDefaultTest::UserDefaultTest()
     : Layer()
