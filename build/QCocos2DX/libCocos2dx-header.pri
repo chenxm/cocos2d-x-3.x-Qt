@@ -1,7 +1,6 @@
 ## latest cocos2d-x using c++11 or c++0x, so you will see below.
-QMAKE_CXXFLAGS += -std=c++11
-QMAKE_CXXFLAGS += -stdlib=libc++
-QMAKE_LFLAGS += -lc++
+CONFIG += c++11
+#QMAKE_LFLAGS += -lc++
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
 
 # disble the Qt keywords extension here for cocos2d-x 3.x,
@@ -22,14 +21,10 @@ DEFINES += COCOS2D_DEBUG=2
 macx {
     # system libraries.
     INCLUDEPATH += /usr/local/include
-#    LIBS += -L/usr/local/lib/ -lGLEW
-    LIBS += -L/usr/local/lib/ -lz
-    LIBS += -L/usr/local/lib/ -lcurl
-
-#    INCLUDEPATH += /usr/local/homebrew/Cellar/glew/1.10.0/include
-#    LIBS += /usr/local/homebrew/Cellar/glew/1.10.0/lib/libGLEW.a
     INCLUDEPATH += /opt/local/include
-    LIBS += /opt/local/lib/libGLEW.a
+
+    LIBS += -L/usr/local/lib/ -L/opt/local/lib
+    LIBS += -L/usr/local/lib/ -lz -lcurl -lGLEW
 
     INCLUDEPATH += $$PWD/../../external/lua/luajit/include
 
