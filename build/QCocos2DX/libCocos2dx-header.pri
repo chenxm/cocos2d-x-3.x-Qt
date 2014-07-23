@@ -24,7 +24,9 @@ macx {
     INCLUDEPATH += /opt/local/include
 
     LIBS += -L/usr/local/lib/ -L/opt/local/lib
-    LIBS += -L/usr/local/lib/ -lz -lcurl -lGLEW
+    LIBS += -lz
+    LIBS += -lcurl
+    LIBS += -lGLEW
 
     INCLUDEPATH += $$PWD/../../external/lua/luajit/include
 
