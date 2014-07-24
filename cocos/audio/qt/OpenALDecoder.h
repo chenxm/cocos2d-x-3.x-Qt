@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <stdio.h>
-#include <AL/al.h>
+#include <OpenAL/al.h>
 #include "cocos2d.h"
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_TIZEN

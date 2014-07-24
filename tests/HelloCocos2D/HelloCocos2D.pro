@@ -20,8 +20,7 @@ SCRIPTS_RES = $$PWD/../../cocos/scripting/lua-bindings/script
 
 include($$PWD/../../build/QCocos2DX/libCocos2dx-header.pri)
 
-LIBS    += $$PWD/../../bin/libcocos2d.1.0.0.dylib
-LIBS    += $$PWD/../../external/openal/prebuilt/mac/libopenal.dylib
+LIBS    += -L$$PWD/../../bin -lcocos2d
 
 macx {
     contains(CONFIG, app_bundle) {

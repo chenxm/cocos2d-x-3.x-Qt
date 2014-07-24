@@ -16,69 +16,54 @@ DEFINES += CC_KEYBOARD_SUPPORT
 
 DEFINES += __QT__
 DEFINES += CC_UNDER_QT
-DEFINES += COCOS2D_DEBUG=2
+DEFINES += COCOS2D_DEBUG=1
 
 macx {
     # system libraries.
-    INCLUDEPATH += /usr/local/include
-    INCLUDEPATH += /opt/local/include
-
-    LIBS += -L/usr/local/lib/ -L/opt/local/lib
     LIBS += -lz
     LIBS += -lcurl
-    LIBS += -lGLEW
+    LIBS += -lsqlite3
 
-    INCLUDEPATH += $$PWD/../../external/lua/luajit/include
+    QMAKE_CXXFLAGS += -F/Library/Frameworks
+    QMAKE_LFLAGS += -F/Library/Frameworks
 
     LIBS    += -framework Cocoa
     LIBS    += -framework Foundation
+    LIBS    += -framework OpenAL
+    LIBS    += -framework Ogg
+    LIBS    += -framework Vorbis
 
     # prebuilt libraries
     INCLUDEPATH += $$PWD/../../external/png/include/mac
-    LIBS        += -L$$PWD/../../external/png/prebuilt/mac -lpng
+    LIBS += $$PWD/../../external/png/prebuilt/mac/libpng.a
 
     INCLUDEPATH += $$PWD/../../external/tiff/include/mac
-    LIBS        += -L$$PWD/../../external/tiff/prebuilt/mac -ltiff
+    LIBS += $$PWD/../../external/tiff/prebuilt/mac/libtiff.a
 
     INCLUDEPATH += $$PWD/../../external/jpeg/include/mac
-    LIBS += -L$$PWD/../../external/jpeg/prebuilt/mac -ljpeg
-
-    INCLUDEPATH += $$PWD/../../external/curl/include/mac
-#    LIBS        += -L$$PWD/../../external/curl/prebuilt/mac -lcurl
-#    LIBS        += $$PWD/../../external/curl/prebuilt/mac/libcurl.a
-
-    INCLUDEPATH += $$PWD/../../external/glfw3/include/mac
-    LIBS += $$PWD/../../external/glfw3/prebuilt/mac/libglfw3.a
-
-    INCLUDEPATH += $$PWD/../../external/openal/include
-    LIBS += -L$$PWD/../../external/openal/prebuilt/mac -lopenal
+    LIBS += $$PWD/../../external/jpeg/prebuilt/mac/libjpeg.a
 
     INCLUDEPATH += $$PWD/../../external/freealut/include
     LIBS += $$PWD/../../external/freealut/prebuilt/mac/libalut.a
 
-    INCLUDEPATH += $$PWD/../../external/libvorbis/include
-    LIBS += $$PWD/../../external/libvorbis/prebuilt/mac/libvorbis.a
-    LIBS += $$PWD/../../external/libvorbis/prebuilt/mac/libvorbisenc.a
-    LIBS += $$PWD/../../external/libvorbis/prebuilt/mac/libvorbisfile.a
-
-    INCLUDEPATH += $$PWD/../../external/sqlite3/include
-    LIBS += -L$$PWD/../../external/sqlite3/libraries/mac -lsqlite3
-
     INCLUDEPATH += $$PWD/../../external/freetype2/include/mac
-    LIBS += -L$$PWD/../../external/freetype2/prebuilt/mac -lfreetype
+    LIBS += $$PWD/../../external/freetype2/prebuilt/mac/libfreetype.a
 
     INCLUDEPATH += $$PWD/../../external/websockets/include/mac
-    LIBS += -L$$PWD/../../external/websockets/prebuilt/mac -lwebsockets
+    LIBS += $$PWD/../../external/websockets/prebuilt/mac/libwebsockets.a
 
     INCLUDEPATH += $$PWD/../../external/webp/include/mac
-    LIBS += -L$$PWD/../../external/webp/prebuilt/mac -lwebp
+    LIBS += $$PWD/../../external/webp/prebuilt/mac/libwebp.a
 
-#    INCLUDEPATH += $$PWD/../../external/lua/luajit/include
-#    LIBS += -L$$PWD/../../external/lua/luajit/prebuilt/mac -lluajit
+    INCLUDEPATH += $$PWD/../../external/lua/luajit/include
+    LIBS += -L$$PWD/../../external/lua/luajit/prebuilt/mac -lluajit
+
+    INCLUDEPATH += /opt/local/include
+    LIBS += /opt/local/lib/libGLEW.a
 
     contains(TEMPLATE, app) {
         APP_BUNDLE_PATH  = $${DESTDIR}/$${TARGET}.app
-        DYLIB_PATH  = $${DESTDIR}/libcocos2d.1.0.0.dylib
+        DYLIB_PATH  = $${DESTDIR}/libcocos2d.dylib
 
         message(------------------------BEGIN------------------------------)
         ## checking `DESTDIR`, 3rd party programmer must define the `DESTDIR` before including ME in your own project.
@@ -92,7 +77,6 @@ macx {
 
         QMAKE_POST_LINK += $(QTDIR)/bin/macdeployqt $$APP_BUNDLE_PATH &
         QMAKE_POST_LINK += mkdir -p $$APP_BUNDLE_PATH/Contents/Frameworks &
-        QMAKE_POST_LINK += cp $$PWD/../../external/openal/prebuilt/mac/libopenal.1.dylib $$APP_BUNDLE_PATH/Contents/Frameworks/libopenal.1.dylib &
         QMAKE_POST_LINK += cp $$DYLIB_PATH  $$APP_BUNDLE_PATH/Contents/Frameworks/libcocos2d.1.dylib &
 
     }
@@ -129,7 +113,6 @@ COCOS2D_INCLUDEPATH +=    $$COCOS2D_DIR/extensions
 COCOS2D_INCLUDEPATH +=    $$COCOS2D_DIR/extensions/GUI
 COCOS2D_INCLUDEPATH +=    $$COCOS2D_DIR/external/lua
 COCOS2D_INCLUDEPATH +=    $$COCOS2D_DIR/external/lua/tolua
-#COCOS2D_INCLUDEPATH +=    $$COCOS2D_DIR/external/lua/lua
 COCOS2D_INCLUDEPATH +=    $$COCOS2D_DIR/external/lua/luajit/include
 COCOS2D_INCLUDEPATH +=    $$COCOS2D_DIR/external/lua/luajit/src/src
 #COCOS2D_INCLUDEPATH +=    $$COCOS2D_DIR/external/lua/luasocket
